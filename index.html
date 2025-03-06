@@ -79,6 +79,20 @@
             margin-top: 10px;
             font-size: 18px;
         }
+        #auto-clicker {
+            margin-top: 20px;
+            background-color: #ff5733;
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #auto-clicker:hover {
+            background-color: #e94f30;
+        }
     </style>
 </head>
 <body>
@@ -158,12 +172,15 @@
             <span>Cost: <span id="chrome-cost">120 trillion</span> Skibidi Coins</span>
             <button onclick="buyUpgrade('chrome', 120000000000000, 'chrome-cost')">Buy</button>
         </div>
+        <button id="auto-clicker" onclick="toggleAutoClicker()">Start Auto Clicker</button>
         <div id="cookie-count">Skibidi Coins: 0</div>
     </div>
 
     <script>
         let cookies = 0;
         let clicks = 0;
+        let autoClickerInterval;
+        let isAutoClickerActive = false;
 
         // Function to increase cookies on click
         document.getElementById('click-button').addEventListener('click', function() {
@@ -173,14 +190,32 @@
             document.getElementById('click-count').textContent = `Clicks: ${clicks}`;
         });
 
-        // Function to handle buying upgrades without a popup
+        // Function to handle buying upgrades
         function buyUpgrade(upgrade, cost, costId) {
             if (cookies >= cost) {
-                cookies -= cost;
-                document.getElementById('cookie-count').textContent = `Skibidi Coins: ${cookies}`;
+                cookies -= cost; // Subtract the cost from your total cookies
+                document.getElementById('cookie-count').textContent = `Skibidi Coins: ${cookies}`; // Update the display
                 // Increase the cost for the next purchase and update the display
                 let newCost = Math.floor(cost * 1.15);  // Increase cost by 15%
-                document.getElementById(costId).textContent = newCost;
+                document.getElementById(costId).textContent = newCost; // Update the cost
+            }
+        }
+
+        // Toggle auto clicker on and off
+        function toggleAutoClicker() {
+            if (isAutoClickerActive) {
+                clearInterval(autoClickerInterval); // Stop auto-clicker
+                document.getElementById('auto-clicker').textContent = 'Start Auto Clicker';
+                isAutoClickerActive = false;
+            } else {
+                autoClickerInterval = setInterval(function() {
+                    cookies++; // Simulate a click every interval
+                    clicks++;
+                    document.getElementById('cookie-count').textContent = `Skibidi Coins: ${cookies}`;
+                    document.getElementById('click-count').textContent = `Clicks: ${clicks}`;
+                }, 1000); // Every second (1000ms)
+                document.getElementById('auto-clicker').textContent = 'Stop Auto Clicker';
+                isAutoClickerActive = true;
             }
         }
     </script>
