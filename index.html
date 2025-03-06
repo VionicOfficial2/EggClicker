@@ -99,124 +99,173 @@
     <div id="click-area">
         <img id="click-button" src="https://skibiditoilet.shop/cdn/shop/files/DSC9377.png?v=1727907940&width=2000" alt="Click Me">
         <div id="click-count">Clicks: 0</div>
+        <div id="coin-count">Coins: 0</div> <!-- Coins display beneath the click area -->
     </div>
     <div id="sidebar">
         <h2>Upgrades</h2>
         <div class="upgrade">
             <span>Cursor</span>
             <span>Cost: <span id="cursor-cost">15</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('cursor', 15, 'cursor-cost')">Buy</button>
+            <button onclick="buyUpgrade('cursor', 'cursor-cost', 15, 1)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Grandma</span>
             <span>Cost: <span id="grandma-cost">100</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('grandma', 100, 'grandma-cost')">Buy</button>
+            <button onclick="buyUpgrade('grandma', 'grandma-cost', 100, 5)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Farm</span>
             <span>Cost: <span id="farm-cost">1,100</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('farm', 1100, 'farm-cost')">Buy</button>
+            <button onclick="buyUpgrade('farm', 'farm-cost', 1100, 20)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Factory</span>
             <span>Cost: <span id="factory-cost">12,000</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('factory', 12000, 'factory-cost')">Buy</button>
+            <button onclick="buyUpgrade('factory', 'factory-cost', 12000, 50)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Mine</span>
             <span>Cost: <span id="mine-cost">130,000</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('mine', 130000, 'mine-cost')">Buy</button>
+            <button onclick="buyUpgrade('mine', 'mine-cost', 130000, 100)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Shipment</span>
             <span>Cost: <span id="shipment-cost">1,400,000</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('shipment', 1400000, 'shipment-cost')">Buy</button>
+            <button onclick="buyUpgrade('shipment', 'shipment-cost', 1400000, 200)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Alchemy Lab</span>
             <span>Cost: <span id="alchemy-cost">12,000,000</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('alchemy', 12000000, 'alchemy-cost')">Buy</button>
+            <button onclick="buyUpgrade('alchemy', 'alchemy-cost', 12000000, 500)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Portal</span>
             <span>Cost: <span id="portal-cost">120,000,000</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('portal', 120000000, 'portal-cost')">Buy</button>
+            <button onclick="buyUpgrade('portal', 'portal-cost', 120000000, 1000)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Time Machine</span>
             <span>Cost: <span id="time-cost">1.1 billion</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('time', 1100000000, 'time-cost')">Buy</button>
+            <button onclick="buyUpgrade('time', 'time-cost', 1100000000, 2500)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Antimatter Condenser</span>
             <span>Cost: <span id="antimatter-cost">12 billion</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('antimatter', 12000000000, 'antimatter-cost')">Buy</button>
+            <button onclick="buyUpgrade('antimatter', 'antimatter-cost', 12000000000, 5000)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Prism</span>
             <span>Cost: <span id="prism-cost">120 billion</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('prism', 120000000000, 'prism-cost')">Buy</button>
+            <button onclick="buyUpgrade('prism', 'prism-cost', 120000000000, 10000)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Chandelier</span>
             <span>Cost: <span id="chandelier-cost">1.2 trillion</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('chandelier', 1200000000000, 'chandelier-cost')">Buy</button>
+            <button onclick="buyUpgrade('chandelier', 'chandelier-cost', 1200000000000, 20000)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Fractal Engine</span>
             <span>Cost: <span id="fractal-cost">12 trillion</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('fractal', 12000000000000, 'fractal-cost')">Buy</button>
+            <button onclick="buyUpgrade('fractal', 'fractal-cost', 12000000000000, 50000)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Chrome Plating</span>
             <span>Cost: <span id="chrome-cost">120 trillion</span> Skibidi Coins</span>
-            <button onclick="buyUpgrade('chrome', 120000000000000, 'chrome-cost')">Buy</button>
+            <button onclick="buyUpgrade('chrome', 'chrome-cost', 120000000000000, 100000)">Buy</button>
         </div>
         <button id="auto-clicker" onclick="toggleAutoClicker()">Start Auto Clicker</button>
-        <div id="cookie-count">Skibidi Coins: 0</div>
     </div>
 
     <script>
-        let cookies = 0;
+        let coins = 0;
         let clicks = 0;
         let autoClickerInterval;
         let isAutoClickerActive = false;
+        let clickValue = 1; // Base value per click
+        let autoClickerRate = 1; // Cookies per second from auto-clicker
 
-        // Function to increase cookies on click
-        document.getElementById('click-button').addEventListener('click', function() {
-            cookies++;
+        // Object to hold upgrade costs
+        const upgradeCosts = {
+            cursor: 15,
+            grandma: 100,
+            farm: 1100,
+            factory: 12000,
+            mine: 130000,
+            shipment: 1400000,
+            alchemy: 12000000,
+            portal: 120000000,
+            time: 1100000000,
+            antimatter: 12000000000,
+            prism: 120000000000,
+            chandelier: 1200000000000,
+            fractal: 12000000000000,
+            chrome: 120000000000000
+        };
+
+        // Function to increase coins on click
+        document.getElementById('click-button').addEventListener('click', () => {
+            coins += clickValue;
             clicks++;
-            document.getElementById('cookie-count').textContent = `Skibidi Coins: ${cookies}`;
-            document.getElementById('click-count').textContent = `Clicks: ${clicks}`;
+            updateCoinDisplay();
+            updateClickCount();
         });
 
-        // Function to handle buying upgrades
-        function buyUpgrade(upgrade, cost, costId) {
-            if (cookies >= cost) {
-                cookies -= cost; // Subtract the cost from your total cookies
-                document.getElementById('cookie-count').textContent = `Skibidi Coins: ${cookies}`; // Update the display
-                // Increase the cost for the next purchase and update the display
-                let newCost = Math.floor(cost * 1.15);  // Increase cost by 15%
-                document.getElementById(costId).textContent = newCost; // Update the cost
+        // Function to update the coin count display
+        function updateCoinDisplay() {
+            document.getElementById('coin-count').textContent = 'Coins: ' + coins;
+        }
+
+        // Function to update the click count
+        function updateClickCount() {
+            document.getElementById('click-count').textContent = 'Clicks: ' + clicks;
+        }
+
+        // Function to handle upgrades
+        function buyUpgrade(upgrade, costId, baseCost, increment) {
+            const currentCost = upgradeCosts[upgrade];
+            if (coins >= currentCost) {
+                coins -= currentCost;
+                clickValue += increment;
+                autoClickerRate = clickValue; // Sync auto-clicker rate with click value
+
+                // Increase the cost for the next upgrade
+                upgradeCosts[upgrade] = Math.round(currentCost * 1.1); // Increase by 10%
+
+                // Update the displayed cost
+                document.getElementById(costId).textContent = formatNumber(upgradeCosts[upgrade]);
+                updateCoinDisplay();
+                updateClickCount();
             }
         }
 
-        // Toggle auto clicker on and off
+        // Function to format large numbers
+        function formatNumber(num) {
+            if (num >= 1e12) {
+                return (num / 1e12).toFixed(1) + ' trillion';
+            } else if (num >= 1e9) {
+                return (num / 1e9).toFixed(1) + ' billion';
+            } else if (num >= 1e6) {
+                return (num / 1e6).toFixed(1) + ' million';
+            } else {
+                return num.toLocaleString();
+            }
+        }
+
+        // Function to toggle auto clicker
         function toggleAutoClicker() {
             if (isAutoClickerActive) {
-                clearInterval(autoClickerInterval); // Stop auto-clicker
+                clearInterval(autoClickerInterval);
                 document.getElementById('auto-clicker').textContent = 'Start Auto Clicker';
-                isAutoClickerActive = false;
             } else {
-                autoClickerInterval = setInterval(function() {
-                    cookies++; // Simulate a click every interval
-                    clicks++;
-                    document.getElementById('cookie-count').textContent = `Skibidi Coins: ${cookies}`;
-                    document.getElementById('click-count').textContent = `Clicks: ${clicks}`;
-                }, 1000); // Every second (1000ms)
+                autoClickerInterval = setInterval(() => {
+                    coins += autoClickerRate;
+                    clicks++; // Simulate a click on each interval
+                    updateCoinDisplay();
+                    updateClickCount();
+                }, 1000);
                 document.getElementById('auto-clicker').textContent = 'Stop Auto Clicker';
-                isAutoClickerActive = true;
             }
+            isAutoClickerActive = !isAutoClickerActive;
         }
     </script>
 </body>
