@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skibidi Clicker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        #click-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            height: 100%;
+            flex-direction: column;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #click-area img {
+            width: 200px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border-radius: 10px;
+        }
+        #click-area img:hover {
+            transform: scale(1.1);
+        }
+        #sidebar {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow-y: auto;
+        }
+        .upgrade {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .upgrade button {
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .upgrade button:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+        .upgrade button:active {
+            background-color: #3e8e41;
+            transform: scale(1.05);
+        }
+        #cookie-count {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        #click-count {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div id="click-area">
+        <img id="click-button" src="https://skibiditoilet.shop/cdn/shop/files/DSC9377.png?v=1727907940&width=2000" alt="Click Me">
+        <div id="click-count">Clicks: 0</div>
+    </div>
+    <div id="sidebar">
+        <h2>Upgrades</h2>
+        <div class="upgrade">
+            <span>Cursor</span>
+            <span>Cost: <span id="cursor-cost">15</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('cursor', 15, 'cursor-cost')">Buy</button>
+        </div>
+        <div class="upgrade">
+            <span>Grandma</span>
+            <span>Cost: <span id="grandma-cost">100</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('grandma', 100, 'grandma-cost')">Buy</button>
+        </div>
+        <div class="upgrade">
+            <span>Farm</span>
+            <span>Cost: <span id="farm-cost">1,100</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('farm', 1100, 'farm-cost')">Buy</button>
+        </div>
+        <div class="upgrade">
+            <span>Factory</span>
+            <span>Cost: <span id="factory-cost">12,000</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('factory', 12000, 'factory-cost')">Buy</button>
+        </div>
+        <div class="upgrade">
+            <span>Mine</span>
+            <span>Cost: <span id="mine-cost">130,000</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('mine', 130000, 'mine-cost')">Buy</button>
+        </div>
+        <div class="upgrade">
+            <span>Shipment</span>
+            <span>Cost: <span id="shipment-cost">1,400,000</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('shipment', 1400000, 'shipment-cost')">Buy</button>
+        </div>
+        <div class="upgrade">
+            <span>Alchemy Lab</span>
+            <span>Cost: <span id="alchemy-cost">12,000,000</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('alchemy', 12000000, 'alchemy-cost')">Buy</button>
+        </div>
+        <div class="upgrade">
+            <span>Portal</span>
+            <span>Cost: <span id="portal-cost">120,000,000</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('portal', 120000000, 'portal-cost')">Buy</button>
+        </div>
+        <div class="upgrade">
+            <span>Time Machine</span>
+            <span>Cost: <span id="time-cost">1.1 billion</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('time', 1100000000, 'time-cost')">Buy</button>
+        </div>
+        <div class="upgrade">
+            <span>Antimatter Condenser</span>
+            <span>Cost: <span id="antimatter-cost">12 billion</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('antimatter', 12000000000, 'antimatter-cost')">Buy</button>
+        </div>
+        <div class="upgrade">
+            <span>Prism</span>
+            <span>Cost: <span id="prism-cost">120 billion</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('prism', 120000000000, 'prism-cost')">Buy</button>
+        </div>
+        <div class="upgrade">
+            <span>Chandelier</span>
+            <span>Cost: <span id="chandelier-cost">1.2 trillion</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('chandelier', 1200000000000, 'chandelier-cost')">Buy</button>
+        </div>
+        <div class="upgrade">
+            <span>Fractal Engine</span>
+            <span>Cost: <span id="fractal-cost">12 trillion</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('fractal', 12000000000000, 'fractal-cost')">Buy</button>
+        </div>
+        <div class="upgrade">
+            <span>Chrome Plating</span>
+            <span>Cost: <span id="chrome-cost">120 trillion</span> Skibidi Coins</span>
+            <button onclick="buyUpgrade('chrome', 120000000000000, 'chrome-cost')">Buy</button>
+        </div>
+        <div id="cookie-count">Skibidi Coins: 0</div>
+    </div>
+
+    <script>
+        let cookies = 0;
+        let clicks = 0;
+
+        // Function to increase cookies on click
+        document.getElementById('click-button').addEventListener('click', function() {
+            cookies++;
+            clicks++;
+            document.getElementById('cookie-count').textContent = `Skibidi Coins: ${cookies}`;
+            document.getElementById('click-count').textContent = `Clicks: ${clicks}`;
+        });
+
+        // Function to handle buying upgrades
+        function buyUpgrade(upgrade, cost, costId) {
+            if (cookies >= cost) {
+                cookies -= cost;
+                document.getElementById('cookie-count').textContent = `Skibidi Coins: ${cookies}`;
+                // Increase the cost for the next purchase and update the display
+                let newCost = Math.floor(cost * 1.15);  // Increase cost by 15%
+                document.getElementById(costId).textContent = newCost;
+                alert(`You bought a ${upgrade}!`);
+            } else {
+                alert('Not enough Skibidi Coins!');
+            }
+        }
+    </script>
+</body>
+</html>
