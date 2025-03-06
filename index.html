@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Egg Clicker</title>
+    <title>Skibidi Clicker</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -81,9 +81,9 @@
 </head>
 <body>
     <div id="click-area">
-        <img id="click-button" src="https://images.vexels.com/media/users/3/199372/isolated/preview/1c4a614126e716a3c93fd5b9d9b0254b-fried-egg-illustration.png" alt="Click Me">
-        <div id="click-count">CLICKS: 0</div>
-        <div id="coin-count">EGGS: 0</div> <!-- Coins display beneath the click area -->
+        <img id="click-button" src="https://skibiditoilet.shop/cdn/shop/files/DSC9377.png?v=1727907940&width=2000" alt="Click Me">
+        <div id="click-count">Clicks: 0</div>
+        <div id="coin-count">Coins: 0</div> <!-- Coins display beneath the click area -->
         <button id="save-button">Save Game</button> <!-- Save button -->
         <button id="load-button">Load Game</button> <!-- Load button -->
         <button id="auto-clicker">Start Auto Clicker</button> <!-- Auto-clicker button -->
@@ -163,8 +163,8 @@
     </div>
 
     <script>
-        let EGGS = 0;
-        let CLICKS = 0;
+        let coins = 0;
+        let clicks = 0;
         let autoClickerInterval;
         let isAutoClickerActive = false;
         let clickValue = 1;
@@ -190,8 +190,8 @@
         function loadGame() {
             const savedGame = JSON.parse(localStorage.getItem('skibidiClicker'));
             if (savedGame) {
-                coins = savedGame.EGGS || 0;
-                clicks = savedGame.CLICKS || 0;
+                coins = savedGame.coins || 0;
+                clicks = savedGame.clicks || 0;
                 clickValue = savedGame.clickValue || 1;
                 autoClickerRate = savedGame.autoClickerRate || 1;
                 for (let upgrade in savedGame.upgrades) {
@@ -204,8 +204,8 @@
 
         function saveGame() {
             const gameData = {
-                coins: EGGS,
-                clicks: CLICKS,
+                coins: coins,
+                clicks: clicks,
                 clickValue: clickValue,
                 autoClickerRate: autoClickerRate,
                 upgrades: upgradeCosts
