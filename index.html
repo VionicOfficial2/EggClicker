@@ -27,7 +27,7 @@
             border-radius: 10px;
         }
         #click-area img {
-            width: 200px;
+            width: 400px; /* Increased the width of the image */
             cursor: pointer;
             transition: transform 0.2s;
             border-radius: 10px;
@@ -173,7 +173,7 @@
             document.getElementById('click-count').textContent = `Clicks: ${clicks}`;
         });
 
-        // Function to handle buying upgrades
+        // Function to handle buying upgrades without a popup
         function buyUpgrade(upgrade, cost, costId) {
             if (cookies >= cost) {
                 cookies -= cost;
@@ -181,9 +181,6 @@
                 // Increase the cost for the next purchase and update the display
                 let newCost = Math.floor(cost * 1.15);  // Increase cost by 15%
                 document.getElementById(costId).textContent = newCost;
-                alert(`You bought a ${upgrade}!`);
-            } else {
-                alert('Not enough Skibidi Coins!');
             }
         }
     </script>
