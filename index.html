@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skibidi Clicker</title>
+    <title>Egg Clicker</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -30,7 +30,7 @@
         #click-area img:hover {
             transform: scale(1.1);
         }
-        #coin-count, #click-count {
+        #egg-count, #click-count {
             margin-top: 10px;
             font-size: 20px;
             font-weight: bold;
@@ -81,9 +81,9 @@
 </head>
 <body>
     <div id="click-area">
-        <img id="click-button" src="https://skibiditoilet.shop/cdn/shop/files/DSC9377.png?v=1727907940&width=2000" alt="Click Me">
+        <img id="click-button" src="https://images.vexels.com/media/users/3/199372/isolated/preview/1c4a614126e716a3c93fd5b9d9b0254b-fried-egg-illustration.png" alt="Click Me">
         <div id="click-count">Clicks: 0</div>
-        <div id="coin-count">Coins: 0</div> <!-- Coins display beneath the click area -->
+        <div id="egg-count">EGGS: 0</div> <!-- Changed to EGGS display beneath the click area -->
         <button id="save-button">Save Game</button> <!-- Save button -->
         <button id="load-button">Load Game</button> <!-- Load button -->
         <button id="auto-clicker">Start Auto Clicker</button> <!-- Auto-clicker button -->
@@ -108,62 +108,62 @@
         <div class="upgrade">
             <span>Factory</span>
             <span id="factory-cost">Cost: 12,000</span>
-            <button onclick="buyUpgrade('factory', 'factory-cost', 12000, 20)">Buy</button>
+            <button onclick="buyUpgrade('factory', 'factory-cost', 12000, 50)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Mine</span>
             <span id="mine-cost">Cost: 130,000</span>
-            <button onclick="buyUpgrade('mine', 'mine-cost', 130000, 50)">Buy</button>
+            <button onclick="buyUpgrade('mine', 'mine-cost', 130000, 100)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Shipment</span>
             <span id="shipment-cost">Cost: 1,400,000</span>
-            <button onclick="buyUpgrade('shipment', 'shipment-cost', 1400000, 100)">Buy</button>
+            <button onclick="buyUpgrade('shipment', 'shipment-cost', 1400000, 500)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Alchemy Lab</span>
             <span id="alchemy-cost">Cost: 12,000,000</span>
-            <button onclick="buyUpgrade('alchemy', 'alchemy-cost', 12000000, 200)">Buy</button>
+            <button onclick="buyUpgrade('alchemy', 'alchemy-cost', 12000000, 1000)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Portal</span>
             <span id="portal-cost">Cost: 120,000,000</span>
-            <button onclick="buyUpgrade('portal', 'portal-cost', 120000000, 500)">Buy</button>
+            <button onclick="buyUpgrade('portal', 'portal-cost', 120000000, 5000)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Time Machine</span>
             <span id="time-cost">Cost: 1.1 billion</span>
-            <button onclick="buyUpgrade('time', 'time-cost', 1100000000, 1000)">Buy</button>
+            <button onclick="buyUpgrade('time', 'time-cost', 1100000000, 10000)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Antimatter Condenser</span>
             <span id="antimatter-cost">Cost: 12 billion</span>
-            <button onclick="buyUpgrade('antimatter', 'antimatter-cost', 12000000000, 2000)">Buy</button>
+            <button onclick="buyUpgrade('antimatter', 'antimatter-cost', 12000000000, 20000)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Prism</span>
             <span id="prism-cost">Cost: 120 billion</span>
-            <button onclick="buyUpgrade('prism', 'prism-cost', 120000000000, 5000)">Buy</button>
+            <button onclick="buyUpgrade('prism', 'prism-cost', 120000000000, 50000)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Chandelier</span>
             <span id="chandelier-cost">Cost: 1.2 trillion</span>
-            <button onclick="buyUpgrade('chandelier', 'chandelier-cost', 1200000000000, 10000)">Buy</button>
+            <button onclick="buyUpgrade('chandelier', 'chandelier-cost', 1200000000000, 100000)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Fractal Engine</span>
             <span id="fractal-cost">Cost: 12 trillion</span>
-            <button onclick="buyUpgrade('fractal', 'fractal-cost', 12000000000000, 20000)">Buy</button>
+            <button onclick="buyUpgrade('fractal', 'fractal-cost', 12000000000000, 500000)">Buy</button>
         </div>
         <div class="upgrade">
             <span>Chrome Plating</span>
             <span id="chrome-cost">Cost: 120 trillion</span>
-            <button onclick="buyUpgrade('chrome', 'chrome-cost', 120000000000000, 50000)">Buy</button>
+            <button onclick="buyUpgrade('chrome', 'chrome-cost', 120000000000000, 1000000)">Buy</button>
         </div>
     </div>
 
     <script>
-        let coins = 0;
+        let eggs = 0;  // Changed 'coins' to 'eggs'
         let clicks = 0;
         let autoClickerInterval;
         let isAutoClickerActive = false;
@@ -188,34 +188,34 @@
         };
 
         function loadGame() {
-            const savedGame = JSON.parse(localStorage.getItem('skibidiClicker'));
+            const savedGame = JSON.parse(localStorage.getItem('eggClicker'));
             if (savedGame) {
-                coins = savedGame.coins || 0;
+                eggs = savedGame.eggs || 0;
                 clicks = savedGame.clicks || 0;
                 clickValue = savedGame.clickValue || 1;
                 autoClickerRate = savedGame.autoClickerRate || 1;
                 for (let upgrade in savedGame.upgrades) {
                     upgradeCosts[upgrade] = savedGame.upgrades[upgrade];
                 }
-                updateCoinDisplay();
+                updateEggDisplay();
                 updateClickCount();
             }
         }
 
         function saveGame() {
             const gameData = {
-                coins: coins,
+                eggs: eggs,
                 clicks: clicks,
                 clickValue: clickValue,
                 autoClickerRate: autoClickerRate,
                 upgrades: upgradeCosts
             };
-            localStorage.setItem('skibidiClicker', JSON.stringify(gameData));
+            localStorage.setItem('eggClicker', JSON.stringify(gameData));
             alert('Game Saved!');
         }
 
-        function updateCoinDisplay() {
-            document.getElementById('coin-count').textContent = 'Coins: ' + coins;
+        function updateEggDisplay() {
+            document.getElementById('egg-count').textContent = 'EGGS: ' + formatNumber(eggs);
         }
 
         function updateClickCount() {
@@ -224,15 +224,17 @@
 
         function buyUpgrade(upgrade, costId, baseCost, increment) {
             const currentCost = upgradeCosts[upgrade];
-            if (coins >= currentCost) {
-                coins -= currentCost;
+            if (eggs >= currentCost) {
+                eggs -= currentCost;
                 clickValue += increment;
                 autoClickerRate = clickValue;
 
+                // Scale the benefit of the upgrade by 1.1 (10% increase)
                 upgradeCosts[upgrade] = Math.round(currentCost * 1.1);
 
+                // Update the cost display with the new cost
                 document.getElementById(costId).textContent = `Cost: ${formatNumber(upgradeCosts[upgrade])}`;
-                updateCoinDisplay();
+                updateEggDisplay();
                 updateClickCount();
             }
         }
@@ -250,9 +252,9 @@
         }
 
         document.getElementById('click-button').addEventListener('click', () => {
-            coins += clickValue;
+            eggs += clickValue;
             clicks++;
-            updateCoinDisplay();
+            updateEggDisplay();
             updateClickCount();
         });
 
@@ -266,9 +268,9 @@
                 document.getElementById('auto-clicker').textContent = 'Start Auto Clicker';
             } else {
                 autoClickerInterval = setInterval(() => {
-                    coins += autoClickerRate;
+                    eggs += autoClickerRate;
                     clicks++;
-                    updateCoinDisplay();
+                    updateEggDisplay();
                     updateClickCount();
                 }, 1000);
                 document.getElementById('auto-clicker').textContent = 'Stop Auto Clicker';
