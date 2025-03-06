@@ -163,8 +163,8 @@
     </div>
 
     <script>
-        let coins = 0;
-        let clicks = 0;
+        let EGGS = 0;
+        let CLICKS = 0;
         let autoClickerInterval;
         let isAutoClickerActive = false;
         let clickValue = 1;
@@ -190,8 +190,8 @@
         function loadGame() {
             const savedGame = JSON.parse(localStorage.getItem('skibidiClicker'));
             if (savedGame) {
-                coins = savedGame.coins || 0;
-                clicks = savedGame.clicks || 0;
+                coins = savedGame.EGGS || 0;
+                clicks = savedGame.CLICKS || 0;
                 clickValue = savedGame.clickValue || 1;
                 autoClickerRate = savedGame.autoClickerRate || 1;
                 for (let upgrade in savedGame.upgrades) {
@@ -204,8 +204,8 @@
 
         function saveGame() {
             const gameData = {
-                coins: coins,
-                clicks: clicks,
+                coins: EGGS,
+                clicks: CLICKS,
                 clickValue: clickValue,
                 autoClickerRate: autoClickerRate,
                 upgrades: upgradeCosts
